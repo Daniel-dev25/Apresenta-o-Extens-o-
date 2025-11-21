@@ -1,0 +1,229 @@
+/*======================================================*/
+/* 1. VARIÁVEIS CSS (ROOT) */
+/*======================================================*/
+:root {
+    --cor-primaria: #6A1B9A; 
+    --cor-secundaria: #8E24AA; 
+    --cor-texto-header: #333;
+    --cor-fundo-header: #E3F2FD; 
+    --cor-fundo-body: #f5f8fc; 
+    --cor-card-fundo: #ffffff;
+    --cor-borda-card: #e0e0e0;
+    --cor-texto-card: #424242;
+    --cor-link-card: #039BE5; 
+    --cor-subtitulo-card: #757575;
+    --cor-list-item: #f1f4f8; 
+    --cor-shadow: rgba(0, 0, 0, 0.08);
+    --cor-header-main: #6A1B9A; 
+    --cor-header-desc: #424242; 
+}
+
+/*======================================================*/
+/* 2. ESTILOS GERAIS E LAYOUT BASE */
+/*======================================================*/
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--cor-fundo-body);
+    color: var(--cor-texto-card);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/*======================================================*/
+/* 3. ESTILOS DO CABEÇALHO (HEADER) */
+/*======================================================*/
+header {
+    background-color: var(--cor-fundo-header);
+    color: var(--cor-texto-header);
+    padding: 60px 20px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3em;
+    font-weight: 700;
+    color: var(--cor-header-main);
+    line-height: 1.2;
+}
+
+header p {
+    font-size: 1.2em;
+    font-weight: 400;
+    color: var(--cor-header-desc);
+    max-width: 800px;
+    margin: 15px auto 0 auto;
+}
+
+/*======================================================*/
+/* 4. ESTILOS DE NAVEGAÇÃO (NAV) */
+/*======================================================*/
+nav {
+    margin-bottom: 20px;
+}
+nav a {
+    text-decoration: none;
+    color: var(--cor-link-card);
+    font-weight: 600;
+    padding: 8px 15px;
+    border: 2px solid var(--cor-link-card);
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+nav a:hover {
+    background-color: var(--cor-link-card);
+    color: white;
+}
+
+/*======================================================*/
+/* 5. ESTILOS DA SEÇÃO DE CARDS (AREA SECTION) */
+/*======================================================*/
+.area-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 25px; 
+    padding: 20px 0;
+}
+
+/*======================================================*/
+/* 6. ESTILOS DOS CARDS INDIVIDUAIS */
+/*======================================================*/
+.card {
+    background-color: var(--cor-card-fundo);
+    border: 1px solid var(--cor-borda-card);
+    border-radius: 12px; 
+    padding: 30px; 
+    box-shadow: 0 8px 20px var(--cor-shadow); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column; 
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-header .icon {
+    font-size: 2.2em; 
+    color: var(--cor-link-card); 
+    margin-right: 15px;
+    line-height: 1; 
+}
+
+.card h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: var(--cor-texto-card); 
+    margin: 0;
+}
+
+.card > p {
+    font-size: 0.95em;
+    color: var(--cor-subtitulo-card);
+    margin-bottom: 25px;
+    flex-grow: 1; 
+}
+
+/* Botão de Expansão (Toggle) */
+.toggle-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--cor-link-card);
+    cursor: pointer;
+    margin-top: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    user-select: none; 
+}
+
+.toggle-button .arrow {
+    transition: transform 0.3s ease;
+}
+
+
+/* Conteúdo do Card (Ocultável) */
+.card-content-wrapper {
+    margin-top: 20px;
+    /* Adicionado aqui para o JS controlar */
+    max-height: 0; 
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+.card h3 {
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--cor-texto-card);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card ul li {
+    background-color: var(--cor-list-item);
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    color: var(--cor-texto-card);
+}
+
+/*======================================================*/
+/* 7. ESTILOS DO RODAPÉ (FOOTER) */
+/*======================================================*/
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+    color: var(--cor-subtitulo-card);
+    font-size: 0.9em;
+    border-top: 1px solid var(--cor-borda-card);
+    background-color: var(--cor-card-fundo);
+}
+
+/*======================================================*/
+/* 8. MEDIA QUERIES (RESPONSIVIDADE) */
+/*======================================================*/
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5em;
+    }
+    header p {
+        font-size: 1em;
+    }
+    .area-section {
+        grid-template-columns: 1fr; 
+    }
+    .card {
+        padding: 25px;
+    }
+}
+/* Estilos exclusivos para a página Games */
+.games-area .card {
+    max-width: 480px;   /* tamanho do card */
+    margin: 0 auto;     /* centralizado */
+    width: 100%;
+}
