@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+h1 {
+    color: #333;
+}
+
+#status {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* --- ESTILO DO TABULEIRO --- */
+.board {
+    display: grid;
+    /* Define 3 colunas e 3 linhas de 100 pixels */
+    grid-template-columns: repeat(3, 100px); 
+    grid-template-rows: repeat(3, 100px);
+    margin: 20px auto;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* --- ESTILO DAS CÉLULAS --- */
+.cell {
+    border: 3px solid #666; /* Bordas mais visíveis */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px; /* Letras maiores (X e O) */
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s; /* Transição suave ao passar o mouse */
+}
+
+.cell:hover {
+    background-color: #f0f0f0;
+}
+
+/* --- REMOÇÃO DE BORDAS PARA DEIXAR COM ASPECTO DE JOGO DA VELHA --- */
+
+/* Remove bordas direita e esquerda nas colunas laterais */
+.cell:nth-child(3n) { border-right: none; }
+.cell:nth-child(3n-2) { border-left: none; }
+
+/* Remove bordas superiores e inferiores nas linhas extremas */
+.cell:nth-child(1), .cell:nth-child(2), .cell:nth-child(3) { border-top: none; }
+.cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) { border-bottom: none; }
+
+/* --- ESTILO DO BOTÃO --- */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+/* --- DESTAQUE DA LINHA VENCEDORA --- */
+.winning-cell {
+    background-color: #ffda79; /* Cor de fundo que destaca */
+    color: #c0392b;           /* Cor do texto para contraste */
+    /* Você pode adicionar uma animação ou um efeito aqui */
+    font-weight: 900;
+}

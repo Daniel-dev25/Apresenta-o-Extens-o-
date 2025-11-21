@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Adivinhe o Número (0 a 999)</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 350px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 { color: #3498db; }
+        #message, #chancesMessage {
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        #message { background-color: #ecf0f1; }
+        .win { background-color: #2ecc71; color: white; }
+        .low, .high { background-color: #e74c3c; color: white; }
+        input[type="number"], button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        button:hover { background-color: #2980b9; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Adivinhe o Número Mágico (0 a 999)</h1>
+        
+        <p id="message">Clique em Iniciar Jogo para começar!</p>
+        <p id="chancesMessage">Chances: 0</p>
+        
+        <input type="number" id="guessInput" placeholder="Seu chute aqui">
+        <button onclick="startGame()">INICIAR JOGO</button>
+        <button onclick="checkGuess()" disabled id="checkButton">CHUTAR</button>
+    </div>
+
+    <script>
+        // Variáveis de Estado
+        let sorteio;
+        let chances;
+        let isGameRunning = false;
+        
+        // Elementos DOM
+        const messageDisplay = document.getElementById('message');
+        const chancesDisplay = document.getElementById('chancesMessage');
+        const inputElement = document.getElementById('guessInput');
+        const checkButton = document.getElementById('checkButton');
+        const startButton = document.querySelector('button:first-of-type');
+
+
+        // Função 1: Iniciar o Jogo
+        function startGame() {
+            // GERAÇÃO ATÉ 1000 (0 a 999)
+            sorteio = Math.floor(Math.random() * 1000); 
+            chances = 0;
+            isGameRunning = true;
+            
+            // Habilita/Desabilita botões e campos
+            inputElement.disabled = false;
+            checkButton.disabled = false;
+            startButton.disabled = true;
+
+            // Limpa mensagens
+            messageDisplay.textContent = "Digite seu chute e clique em CHUTAR. (0 a 999)";
+            messageDisplay.className = '';
+            chancesDisplay.textContent = "Chances: 0";
+            inputElement.value = '';
+
+            console.log("Número sorteado:", sorteio); // Para debug
+        }
+
+
+        // Função 2: Checar o Chute
+        function checkGuess() {
+            if (!isGameRunning) return;
+
+            // Pega o valor do input e valida (MUDADO PARA O NOVO LIMITE)
+            const a = Number(inputElement.value);
+            
+            if (isNaN(a) || a < 0 || a > 1000) {
+                messageDisplay.textContent = "Por favor, insira um número válido entre 0 e 1000.";
+                messageDisplay.className = 'low';
+                return;
+            }
+
+            chances++;
+            chancesDisplay.textContent = `Chances: ${chances}`;
+
+            // Lógica de Comparação
+            if (a === sorteio) {
+                messageDisplay.textContent = `🥳 Acertou, parabéns! O número mágico era ${sorteio}.`;
+                messageDisplay.className = 'win';
+                endGame();
+                displayFinalMessage();
+                
+            } else if (a < sorteio) {
+                messageDisplay.textContent = "❌ O valor mágico é MAIOR!";
+                messageDisplay.className = 'low';
+                
+            } else { // a > sorteio
+                messageDisplay.textContent = "❌ O valor mágico é MENOR!";
+                messageDisplay.className = 'high';
+            }
+            
+            // Limpa o input para o próximo chute
+            inputElement.value = '';
+        }
+
+
+        // Função 3: Finaliza o Jogo
+        function endGame() {
+            isGameRunning = false;
+            inputElement.disabled = true;
+            checkButton.disabled = true;
+            startButton.disabled = false;
+        }
+
+
+        // Função 4: Exibe Mensagem Final
+        function displayFinalMessage() {
+            let finalMessage = "";
+
+            if (chances > 20) {
+                finalMessage = "voce é horrivel, tente novamente";
+            } else if (chances >= 15) {
+                finalMessage = "voce é nao fede e nem cheira";
+            } else if (chances >= 10) {
+                finalMessage = "Voce tem alguma habilidade";
+            } else if (chances >= 5) {
+                finalMessage = "Voce nasceu pra isso";
+            } else {
+                finalMessage = "Já pode adivinhar o numero da mega da virada";
+            }
+
+            // Anexa a mensagem final à mensagem principal
+            messageDisplay.innerHTML += `<br><span style="color: #3498db;">Resultado: ${finalMessage}</span>`;
+        }
+    </script>
+
+</body>
+</html>
